@@ -1,3 +1,6 @@
+Discord adresim; https://discord.gg/4PNwtUvqXe
+
+
 Tüm yazılım geliştirici arkadaşlara ve, Yoian sevenlere duyuru;
 
 Bir süre ilerlediğim daha sonra okul vs yüzünden devam ettiremediğim projemi halka sunuyorum.
