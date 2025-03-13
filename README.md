@@ -18,6 +18,7 @@ onun dışında yapman gereken basit, Önce zip halinde projeyi indir masaüstü
 
 1-) Gerekli Paketleri Yükleyin
 
+önce cmdde projenin dizinine gidin örnegin ; cd desktop\YoianAlbionOnlineBlackMarketFree
 cmdye - > pip install -r requirements.txt
 
 3-)cmdye - >" uvicorn app.main:app --reload " yazın
