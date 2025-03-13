@@ -1,0 +1,36 @@
+{
+    "items": [
+        {
+            "id": "T8_BAG",
+            "ench": 0
+        },
+        {
+            "id": "T8_BAG",
+            "ench": 1
+        },
+        {
+            "id": "T7_ARMOR_PLATE_SET",
+            "ench": 2
+        },
+        {
+            "id": "T4_BAG",
+            "ench": 0
+        },
+        {
+            "id": "T4_BAG",
+            "ench": 1
+        },
+        {
+            "id": "T5_BAG",
+            "ench": 0
+        },
+        {
+            "id": "T6_BAG",
+            "ench": 1
+        },
+        {
+            "id": "T6_BAG",
+            "ench": 0
+        }
+    ]
+}

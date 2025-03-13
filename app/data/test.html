@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Albion Market Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .item-image {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.2s;
+            cursor: pointer !important;
+        }
+        
+        .item-image:hover {
+            transform: scale(1.1);
+        }
+        
+        .copy-tooltip {
+            z-index: 1000;
+            pointer-events: none;
+            animation: fadeIn 0.2s;
+            background-color: #198754 !important;
+            color: white !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+            font-size: 12px !important;
+        }
+        
+        .profit-positive {
+            color: #198754;
+            font-weight: bold;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Albion Market Test</h2>
+        
+        <div class="row mb-3">
+            <div class="col">
+                <button id="loadTestData" class="btn btn-primary">Test Verilerini Yükle</button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Resim</th>
+                    <th>Item</th>
+                    <th>Kalite</th>
+                    <th>Şehir</th>
+                    <th>Şehir Fiyatı</th>
+                    <th>Black Market Fiyatı</th>
+                    <th>Kar</th>
+                    <th>Kar %</th>
+                    <th>Son Güncelleme</th>
+                </tr>
+            </thead>
+            <tbody id="marketData">
+                <!-- Veriler buraya yüklenecek -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Örnek test verileri
+        const testData = [
+            {
+                item_id: "T5_OFF_SHIELD_HELL@3",
+                item_name: "Expert's Caitiff Shield",
+                quality: "Outstanding",
+                market_city: "Thetford",
+                market_price: 150000,
+                black_market_price: 200000,
+                profit: 50000,
+                profit_percentage: 33.33,
+                market_update: "2024-01-31 15:30"
+            },
+            {
+                item_id: "T6_2H_KNUCKLES_SET3@1",
+                item_name: "Master's Brawler Gauntlets",
+                quality: "Excellent",
+                market_city: "Martlock",
+                market_price: 300000,
+                black_market_price: 400000,
+                profit: 100000,
+                profit_percentage: 33.33,
+                market_update: "2024-01-31 15:35"
+            }
+            // İstediğiniz kadar test verisi ekleyebilirsiniz
+        ];
+
+        function displayData(data) {
+            const tbody = document.getElementById('marketData');
+            tbody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                const itemId = item.item_id.split('@')[0];
+                
+                row.innerHTML = `
+                    <td>
+                        <div class="position-relative">
+                            <img src="https://render.albiononline.com/v1/item/${itemId}" 
+                                 class="item-image" 
+                                 alt="${item.item_name}"
+                                 data-item-name="${item.item_name}"
+                                 title="Tıkla ve kopyala"
+                                 onerror="this.src='https://via.placeholder.com/32'">
+                            <div class="copy-tooltip d-none position-absolute bg-success text-white px-2 py-1 rounded" 
+                                 style="top: -30px; left: 50%; transform: translateX(-50%);">
+                                Kopyalandı!
+                            </div>
+                        </div>
+                    </td>
+                    <td>${item.item_name}</td>
+                    <td>${item.quality}</td>
+                    <td>${item.market_city}</td>
+                    <td>${item.market_price.toLocaleString()}</td>
+                    <td>${item.black_market_price.toLocaleString()}</td>
+                    <td class="profit-positive">${item.profit.toLocaleString()}</td>
+                    <td class="profit-positive">${item.profit_percentage.toFixed(2)}%</td>
+                    <td>${item.market_update}</td>
+                `;
+                
+                tbody.appendChild(row);
+
+                // Resme tıklama olayını ekle
+                const img = row.querySelector('.item-image');
+                const tooltip = row.querySelector('.copy-tooltip');
+                
+                img.onclick = function() {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = item.item_name;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    
+                    try {
+                        document.execCommand('copy');
+                        tooltip.classList.remove('d-none');
+                        setTimeout(() => {
+                            tooltip.classList.add('d-none');
+                        }, 1000);
+                    } catch (err) {
+                        console.error('Copy failed:', err);
+                    }
+                    
+                    document.body.removeChild(textArea);
+                };
+            });
+        }
+
+        // Test verilerini yükle butonu
+        document.getElementById('loadTestData').onclick = function() {
+            displayData(testData);
+        };
+    </script>
+</body>
+</html>
